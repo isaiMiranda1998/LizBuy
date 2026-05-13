@@ -1,5 +1,6 @@
 from app.repositories.order_repository import OrderRepository
 from app.repositories.cart_repository import CartRepository
+from app.services.product_service import ProductService
 from app.schemas.order import OrderResponse, OrderCreate
 from .helpers import generate_uuid4, parse_id
 from app.models.order import Order, OrderItem, Currencies, OrderStatus
@@ -7,9 +8,10 @@ from app.models.cart import CartItem
 from app.core.exceptions import InvalidProductQuantity, InvalidCurrency, OrderNotFoundError, CartNotFoundError, InvalidOrderStatus
 
 class OrderService:
-    def __init__(self, order_repo: OrderRepository, cart_repo: CartRepository):
+    def __init__(self, order_repo: OrderRepository, cart_repo: CartRepository, product_service: ProductService):
         self.order_repo = order_repo
         self.cart_repo = cart_repo
+        self.product_service = product_service
 
     def get_order(self, order_id: str):
         return OrderResponse.model_validate(self._get_order_by_id(order_id))
@@ -38,10 +40,14 @@ class OrderService:
     
     def confirm_paid_order(self, order_id: str):
         new_status = OrderStatus.PAID
-        
+        order = self._get_order_by_id(order_id)
+
+        for order_item in order.order_items:
+            self.product_service.decrease_stock_product(str(order_item.product_id), order_item.quantity)
+
         return OrderResponse.model_validate(
             self.order_repo.partial_update_order(
-                self._get_order_by_id(order_id), 
+                order, 
                 status=new_status
             )
         )
