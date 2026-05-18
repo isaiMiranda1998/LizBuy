@@ -39,7 +39,7 @@ class UserRepository:
         return user
     
     def partial_update_user(self, user: User, /, **kwargs: str):
-        for name_field, value in kwargs:
+        for name_field, value in kwargs.items():
             setattr(user, name_field, value)
 
         self.db.commit()

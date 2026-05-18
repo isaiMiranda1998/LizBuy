@@ -19,7 +19,7 @@ class PaymentRepository:
         return self.db.execute(stmt).scalar()
     
     def partial_update_payment(self, payment: Payment, **kwargs: Any):
-        for attribute, value in kwargs:
+        for attribute, value in kwargs.items():
             setattr(payment, attribute, value)
 
         self.db.commit()

@@ -20,7 +20,7 @@ def create_paypal_order(order_id: str, payment_service: Annotated[PaymentService
     except OrderNotFoundError as ex:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(ex))
     
-@router.post("/paypal/capture/{order_id}", response_model=PaymentResponse) #dependencies=[Depends(require_auth)]
+@router.post("/paypal/capture/{paypal_order_id}", response_model=PaymentResponse) #dependencies=[Depends(require_auth)]
 def capture_paypal_order(paypal_order_id: str, payment_service: Annotated[PaymentService, Depends(get_payment_service)]):
     try:
         return payment_service.capture_paypal_order(paypal_order_id)

@@ -35,7 +35,7 @@ class ProductRepository:
         return product
     
     def partial_update_product(self, product: Product, **kwargs: Any):
-        for attribute, value in kwargs:
+        for attribute, value in kwargs.items():
             setattr(product, attribute, value)
 
         self.db.commit()

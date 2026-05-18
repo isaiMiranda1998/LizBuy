@@ -27,7 +27,7 @@ class OrderRepository:
         return order
     
     def partial_update_order(self, order: Order, **kwargs: Any):
-        for attribute, value in kwargs:
+        for attribute, value in kwargs.items():
             setattr(order, attribute, value)
 
         self.db.commit()

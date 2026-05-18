@@ -54,11 +54,13 @@ class PaymentService:
             raise PayPalNotFoundOrder(f"Paypal order with ID {paypal_order_id} doesn't exist")
 
         headers: dict[str, Any] = {
-            "Authorization": f"{self._get_paypal_access_token()}",
+            "Authorization": f"Bearer {self._get_paypal_access_token()}",
             "PayPal-Request-Id": f"{generate_uuid4()}"
         }
 
-        self._fetch(f"https://api-m.sandbox.paypal.com/v2/checkout/orders/{paypal_order.provider_payment_id}/capture", "post", headers=headers)
+        json = {}
+
+        self._fetch(f"https://api-m.sandbox.paypal.com/v2/checkout/orders/{paypal_order.provider_payment_id}/capture", "post", headers=headers, json=json)
         self.order_service.confirm_paid_order(str(paypal_order.order_id))
         
         return PaymentResponse.model_validate(
@@ -89,6 +91,7 @@ class PaymentService:
             try:
                 data = json.load(file)
                 expiration_date = datetime.fromisoformat(data["expires_in"])
+                print(expiration_date)
 
                 if datetime.now(timezone.utc) >= expiration_date:
                     file.seek(0)
