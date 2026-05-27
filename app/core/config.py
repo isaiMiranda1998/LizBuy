@@ -15,10 +15,15 @@ class JwtSettings(BaseSettings):
     )
 
 class DbSettings(BaseSettings):
-    database_url: str
+    user: str
+    password: str
+    host: str
+    port: str
+    name: str
 
     model_config = SettingsConfigDict(
         env_file=".env",
+        env_prefix="DB_",
         env_file_encoding="utf-8",
         extra="ignore"
     )

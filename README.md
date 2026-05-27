@@ -102,3 +102,4 @@ Authorization: Bearer <token>
 - Logging
 - Caching with Redis
 - Implementation of automated tests with GitHub Actions
+- Alembic migrations

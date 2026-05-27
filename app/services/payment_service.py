@@ -91,7 +91,6 @@ class PaymentService:
             try:
                 data = json.load(file)
                 expiration_date = datetime.fromisoformat(data["expires_in"])
-                print(expiration_date)
 
                 if datetime.now(timezone.utc) >= expiration_date:
                     file.seek(0)
