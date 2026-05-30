@@ -1,4 +1,0 @@
-{
-    "access_token": "A21AAIA1SI5gJG89pl8ImClNfWEcQk_MQT1a810HAdn50vjC_HiggAPs2LPHsR2gPPdffWtQlf5hTvpWyaozZ1oVkGdEfP_Vw",
-    "expires_in": "2115-01-28T06:51:20.914234+00:00"
-}
