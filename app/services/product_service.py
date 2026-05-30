@@ -45,11 +45,16 @@ class ProductService:
     def decrease_stock_product(self, product_id: str, quantity: int):
         product = self._get_product_by_id(product_id)
         new_stock = product.stock - quantity
-        
+
+        data = { "stock": new_stock }
+
+        if new_stock == 0:
+            data["active"] = False
+
         return ProductResponse.model_validate(
             self.repo.partial_update_product(
                 product, 
-                stock = new_stock
+                **data
             )
         )
         

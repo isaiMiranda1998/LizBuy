@@ -86,6 +86,7 @@ class PaymentService:
             
     def _get_paypal_access_token(self):
         root = Path(__file__).parent / "paypal_access_token.txt"
+        root.touch()
         
         with open(root, mode="r+", encoding="utf-8") as file:
             try:
@@ -111,7 +112,7 @@ class PaymentService:
         }
 
         response = self._fetch("https://api-m.sandbox.paypal.com/v1/oauth2/token", "post", **params)
-        expiration_date = datetime.now(timezone.utc) + timedelta(response.json()["expires_in"])
+        expiration_date = datetime.now(timezone.utc) + timedelta(seconds=response.json()["expires_in"])
 
         return {
             "access_token": response.json()["access_token"], 
