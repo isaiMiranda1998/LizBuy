@@ -40,11 +40,20 @@ Install the dependencies using the next PIP package manager command <pip install
 
 Create a '.env' file:
 
+### JWT Settings
 JWT_SECRET_KEY=
 JWT_ALGORITHM=
 JWT_ACCESS_TOKEN_EXPIRE_MINUTES=
 JWT_REFRESH_TOKEN_EXPIRE_DAYS=
-DATABASE_URL=
+
+### Database Credentials
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
+DB_NAME=
+
+### Paypal Credentials
 PAYPAL_API_KEY=
 PAYPAL_SECRET_KEY=
 
