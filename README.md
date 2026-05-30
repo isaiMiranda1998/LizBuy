@@ -104,6 +104,16 @@ POST /payments/paypal/capture/{paypal_order_id}
 Protected routes require JWT token:
 Authorization: Bearer <token>
 
+## .gitignore file
+.gitignore
+.venv/
+.vscode/
+__pycache__/
+.env
+.env.*
+paypal_access_token.txt
+*.pyc
+
 ## Future Improvements
 
 - Deployment with Docker
