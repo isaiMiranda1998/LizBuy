@@ -1,4 +1,3 @@
-alembic==1.18.4
 annotated-doc==0.0.4
 annotated-types==0.7.0
 anyio==4.13.0
@@ -9,9 +8,9 @@ click==8.3.2
 colorama==0.4.6
 cryptography==46.0.7
 dnspython==2.8.0
-dotenv==0.9.9
 email-validator==2.3.0
 fastapi==0.136.0
+git-filter-repo==2.47.0
 greenlet==3.4.0
 h11==0.16.0
 httpcore==1.0.9
@@ -19,7 +18,7 @@ httpx==0.28.1
 idna==3.11
 Mako==1.3.12
 MarkupSafe==3.0.3
-psycopg2-binary==2.9.12
+psycopg2==2.9.12
 pycparser==3.0
 pydantic==2.13.1
 pydantic-settings==2.13.1
