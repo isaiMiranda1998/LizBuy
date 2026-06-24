@@ -1,0 +1,25 @@
+services:
+  app:
+    image: lizbuy_uvicorn:latest
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+  db: 
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: lizbuy_user
+      POSTGRES_PASSWORD: 12tH()P$
+      POSTGRES_DB: lizbuy_db
+    volumes:
+      - db_data:/var/lib/postgresql
+
+volumes:
+  db_data:
+    
+    
